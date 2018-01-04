@@ -15,4 +15,9 @@ public class OutputNeuron extends ActiveNeuron {
     public Double getOutput() {
         return output;
     }
+
+    @Override
+    public void couch(double ideal) {
+        setDelta((ideal - output) * derivative(output));
+    }
 }

@@ -8,18 +8,31 @@ import java.util.Map;
  */
 public abstract class Emitter {
 
-    private Map<Receiver, Double> receivers = new HashMap<>();
+    private double delta;
+
+    Map<Receiver, Synapse> receivers = new HashMap<>();
 
     public void addReceiver(Receiver receiver, double weight) {
-        receivers.put(receiver, weight);
+        receivers.put(receiver, new Synapse(weight));
         receiver.onAdded(this);
     }
 
     public void emit(double input) {
         for (Receiver receiver : receivers.keySet()) {
-            double weight = receivers.get(receiver);
-            receiver.accept(this, input, weight);
+            Synapse synapse = receivers.get(receiver);
+            synapse.value = input;
+            receiver.accept(this, synapse);
         }
+    }
+
+    abstract void couch(double ideal);
+
+    public double getDelta() {
+        return delta;
+    }
+
+    void setDelta(double delta) {
+        this.delta = delta;
     }
 
 }

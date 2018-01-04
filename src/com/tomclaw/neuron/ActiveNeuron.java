@@ -16,8 +16,8 @@ public abstract class ActiveNeuron extends Neuron implements Receiver {
     }
 
     @Override
-    public void accept(Emitter emitter, double value, double weight) {
-        inputs.put(emitter, new Synapse(value, weight));
+    public void accept(Emitter emitter, Synapse synapse) {
+        inputs.put(emitter, synapse);
 
         checkInputs();
     }
@@ -38,18 +38,12 @@ public abstract class ActiveNeuron extends Neuron implements Receiver {
 
     abstract void onOutput(double output);
 
+    static double derivative(double value) {
+        return (1.0f - value) * value;
+    }
+
     private static double sigmoid(double value) {
         return 1.0f / (1.0f + Math.pow(Math.E, (-1.0f * value)));
     }
 
-    private static class Synapse {
-
-        double value;
-        double weight;
-
-        Synapse(double value, double weight) {
-            this.value = value;
-            this.weight = weight;
-        }
-    }
 }

@@ -7,6 +7,6 @@ public interface Receiver {
 
     void onAdded(Emitter emitter);
 
-    void accept(Emitter emitter, double value, double weight);
+    void accept(Emitter emitter, Synapse synapse);
 
 }
