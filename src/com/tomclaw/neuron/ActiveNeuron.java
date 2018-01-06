@@ -1,6 +1,9 @@
 package com.tomclaw.neuron;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by solkin on 04/01/2018.
@@ -39,6 +42,7 @@ public abstract class ActiveNeuron extends Emitter implements Receiver {
         onOutput(output);
 
         accepted.clear();
+        resetDelta();
     }
 
     abstract void onOutput(double output);

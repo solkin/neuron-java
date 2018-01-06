@@ -1,8 +1,18 @@
 package com.tomclaw.neuron;
 
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
 
     public static void main(String[] args) {
+        List<double[]> sets = new ArrayList<>();
+        sets.add(new double[]{0, 0, 0});
+        sets.add(new double[]{0, 1, 1});
+        sets.add(new double[]{1, 0, 1});
+        sets.add(new double[]{1, 1, 0});
+
         InputNeuron i1 = new InputNeuron();
         InputNeuron i2 = new InputNeuron();
 
@@ -20,23 +30,27 @@ public class Main {
         h1.addReceiver(o1, 1.5);
         h2.addReceiver(o1, -2.3);
 
-        int sets = 1;
+        for (int epoch = 0; epoch < 20; epoch++) {
+            System.out.println("--- epoch " + (epoch + 1) + " ---");
+            for (double[] set : sets) {
+                double val1 = set[0];
+                double val2 = set[1];
+                double ideal = set[2];
 
-        for (int c = 0; c < 10; c++) {
+                i1.emit(val1);
+                i2.emit(val2);
 
-            i1.emit(1);
-            i2.emit(0);
+                Double output = o1.getOutput();
+                if (output == null) {
+                    System.out.println("no output");
+                } else {
+                    double error = Math.pow(ideal - output, sets.size()) / 1;
 
-            Double output = o1.getOutput();
-            if (output == null) {
-                System.out.println("no output");
-            } else {
-                double ideal = 1 ^ 0;
-                double error = Math.pow(ideal - output, 2) / sets;
+                    DecimalFormat df = new DecimalFormat("#.####");
+                    System.out.println(val1 + " ^ " + val2 + " = " + df.format(output) + ", error: " + df.format(error));
 
-                System.out.println("result: " + output + ", error: " + error);
-
-                o1.couch(ideal);
+                    o1.couch(ideal);
+                }
             }
         }
     }

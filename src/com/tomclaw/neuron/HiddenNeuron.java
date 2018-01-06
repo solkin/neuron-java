@@ -29,8 +29,6 @@ public class HiddenNeuron extends ActiveNeuron {
 
             synapse.weight += weightDelta;
             synapse.gradient = gradient;
-
-            System.out.println("hidden synapse weight: " + synapse.weight);
         }
 
         setDelta(derivative * sum);

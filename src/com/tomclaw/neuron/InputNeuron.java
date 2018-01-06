@@ -25,8 +25,6 @@ public class InputNeuron extends Emitter {
 
             synapse.weight += weightDelta;
             synapse.gradient = gradient;
-
-            System.out.println("input synapse weight: " + synapse.weight);
         }
     }
 }
