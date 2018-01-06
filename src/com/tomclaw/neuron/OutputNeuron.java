@@ -16,8 +16,15 @@ public class OutputNeuron extends ActiveNeuron {
         return output;
     }
 
-    @Override
     public void couch(double ideal) {
         setDelta((ideal - output) * derivative(output));
+
+        notifyCouched();
+    }
+
+    @Override
+    protected void couch() {
+        // just empty, nobody can invoke output neuron to couch
+        // except of manual couch(ideal) invocation
     }
 }

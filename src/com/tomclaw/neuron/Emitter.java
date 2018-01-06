@@ -6,9 +6,7 @@ import java.util.Map;
 /**
  * Created by solkin on 04/01/2018.
  */
-public abstract class Emitter {
-
-    private double delta;
+public abstract class Emitter extends Neuron {
 
     Map<Receiver, Synapse> receivers = new HashMap<>();
 
@@ -25,14 +23,16 @@ public abstract class Emitter {
         }
     }
 
-    abstract void couch(double ideal);
+    public final void onReceiverCouched() {
+        for (Receiver receiver : receivers.keySet()) {
+            if (!receiver.hasDelta()) {
+                return;
+            }
+        }
 
-    public double getDelta() {
-        return delta;
+        couch();
     }
 
-    void setDelta(double delta) {
-        this.delta = delta;
-    }
+    protected abstract void couch();
 
 }

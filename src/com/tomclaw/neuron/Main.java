@@ -3,8 +3,6 @@ package com.tomclaw.neuron;
 public class Main {
 
     public static void main(String[] args) {
-        int sets = 1;
-
         InputNeuron i1 = new InputNeuron();
         InputNeuron i2 = new InputNeuron();
 
@@ -22,17 +20,24 @@ public class Main {
         h1.addReceiver(o1, 1.5);
         h2.addReceiver(o1, -2.3);
 
-        i1.emit(1);
-        i2.emit(0);
+        int sets = 1;
 
-        Double output = o1.getOutput();
-        if (output == null) {
-            System.out.println("no output");
-        } else {
-            double ideal = 1 ^ 0;
-            double error = Math.pow(ideal - output, 2) / sets;
+        for (int c = 0; c < 10; c++) {
 
-            System.out.println("result: " + output + ", error: " + error);
+            i1.emit(1);
+            i2.emit(0);
+
+            Double output = o1.getOutput();
+            if (output == null) {
+                System.out.println("no output");
+            } else {
+                double ideal = 1 ^ 0;
+                double error = Math.pow(ideal - output, 2) / sets;
+
+                System.out.println("result: " + output + ", error: " + error);
+
+                o1.couch(ideal);
+            }
         }
     }
 }

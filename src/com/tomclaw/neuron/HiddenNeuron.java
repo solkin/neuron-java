@@ -14,22 +14,28 @@ public class HiddenNeuron extends ActiveNeuron {
     }
 
     @Override
-    public void couch(double ideal) {
-//        double derivative = derivative(output);
-//        double sum = 0.0f;
-//        for (Receiver receiver : receivers.keySet()) {
-//            double weight = receivers.get(receiver);
-//
-//            double delta = emitter.getDelta();
-//            double gradient = synapse.weight * delta;
-//            sum += gradient;
-//
-//            double weightDelta = velocity * gradient + moment * synapse.gradient;
-//
-//            synapse.weight += weightDelta;
-//            synapse.gradient = gradient;
-//        }
-//        setDelta(derivative * sum);
+    protected void couch() {
+        double derivative = derivative(output);
+        double sum = 0.0f;
+
+        for (Receiver receiver : receivers.keySet()) {
+            Synapse synapse = receivers.get(receiver);
+
+            double delta = receiver.getDelta();
+            double gradient = output * delta;
+            sum += synapse.weight * delta;
+
+            double weightDelta = velocity * gradient + moment * synapse.gradient;
+
+            synapse.weight += weightDelta;
+            synapse.gradient = gradient;
+
+            System.out.println("hidden synapse weight: " + synapse.weight);
+        }
+
+        setDelta(derivative * sum);
+
+        notifyCouched();
     }
 
 }

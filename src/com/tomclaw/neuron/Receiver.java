@@ -9,4 +9,12 @@ public interface Receiver {
 
     void accept(Emitter emitter, Synapse synapse);
 
+    void setDelta(double delta);
+
+    double getDelta();
+
+    boolean hasDelta();
+
+    void resetDelta();
+
 }
