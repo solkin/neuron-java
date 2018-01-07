@@ -7,6 +7,10 @@ public class OutputNeuron extends ActiveNeuron {
 
     private Double output;
 
+    public OutputNeuron(String name) {
+        super(name);
+    }
+
     @Override
     void onOutput(double output) {
         this.output = output;

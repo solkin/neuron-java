@@ -15,22 +15,11 @@ public class Main {
         sets.add(new double[]{1, 0, 1});
         sets.add(new double[]{1, 1, 0});
 
-        InputNeuron i1 = new InputNeuron();
-        InputNeuron i2 = new InputNeuron();
+        InputNeuron[] inputs = new InputNeuron[2];
+        int[] hidden = new int[]{4};
+        OutputNeuron[] outputs = new OutputNeuron[1];
 
-        HiddenNeuron h1 = new HiddenNeuron();
-        HiddenNeuron h2 = new HiddenNeuron();
-
-        OutputNeuron o1 = new OutputNeuron();
-
-        i1.addReceiver(h1, 0.6);
-        i1.addReceiver(h2, 1.1);
-
-        i2.addReceiver(h1, 0.6);
-        i2.addReceiver(h2, 1.1);
-
-        h1.addReceiver(o1, -2);
-        h2.addReceiver(o1, 1.1);
+        createNeuralNetwork(inputs, hidden, outputs);
 
         boolean hasErrors;
         for (int epoch = 0; epoch < 1000; epoch++) {
@@ -41,10 +30,10 @@ public class Main {
                 double val2 = set[1];
                 double ideal = set[2];
 
-                i1.emit(val1);
-                i2.emit(val2);
+                inputs[0].emit(val1);
+                inputs[1].emit(val2);
 
-                Double output = o1.getOutput();
+                Double output = outputs[0].getOutput();
                 if (output == null) {
                     System.err.println("no output");
                     return;
@@ -58,16 +47,56 @@ public class Main {
                         hasErrors = true;
                     }
 
-                    o1.couch(ideal);
+                    outputs[0].couch(ideal);
                 }
             }
             if (!hasErrors) {
                 System.out.println("\n\ncouched by " + (epoch + 1) + " epochs");
-                onCouched(i1, i2, o1, sets);
+                onCouched(inputs[0], inputs[1], outputs[0], sets);
                 break;
             }
         }
 
+    }
+
+    private static void createNeuralNetwork(InputNeuron[] inputs, int[] hidden, OutputNeuron[] outputs) {
+        int inputCounter = 0;
+        int outputCounter = 0;
+        int hiddenCounter = 0;
+        for (int c = 0; c < inputs.length; c++) {
+            inputs[c] = new InputNeuron("I" + (++inputCounter));
+        }
+        for (int c = 0; c < outputs.length; c++) {
+            outputs[c] = new OutputNeuron("O" + (++outputCounter));
+        }
+        List<List<HiddenNeuron>> hiddens = new ArrayList<>();
+        for (int h : hidden) {
+            List<HiddenNeuron> list = new ArrayList<>();
+            for (int c = 0; c < h; c++) {
+                list.add(new HiddenNeuron("H" + (++hiddenCounter)));
+            }
+            hiddens.add(list);
+        }
+        for (InputNeuron input : inputs) {
+            for (HiddenNeuron firstLine : hiddens.get(0)) {
+                input.addReceiver(firstLine, 0.5);
+            }
+        }
+        for (int c = 0; c < hiddens.size() - 1; c++) {
+            List<HiddenNeuron> actual = hiddens.get(c);
+            List<HiddenNeuron> next = hiddens.get(c + 1);
+            for (HiddenNeuron hiddenNeuron : actual) {
+                for (HiddenNeuron n : next) {
+                    hiddenNeuron.addReceiver(n, 0.5);
+                }
+            }
+        }
+        List<HiddenNeuron> last = hiddens.get(hiddens.size() - 1);
+        for (HiddenNeuron l : last) {
+            for (OutputNeuron o : outputs) {
+                l.addReceiver(o, 0.5);
+            }
+        }
     }
 
     private static void onCouched(InputNeuron i1, InputNeuron i2, OutputNeuron o1, List<double[]> sets) {
@@ -83,7 +112,7 @@ public class Main {
             long rounded = Math.round(output);
             double error = Math.pow(ideal - output, 2) / sets.size();
 
-            System.out.println(val1 + " & " + val2 + " = " + rounded + " (" + df.format(output) + "), error: " + df.format(error));
+            System.out.println(val1 + " ~ " + val2 + " = " + rounded + " (" + df.format(output) + "), error: " + df.format(error));
         }
     }
 }

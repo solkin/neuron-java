@@ -15,6 +15,10 @@ public abstract class ActiveNeuron extends Emitter implements Receiver {
 
     private Double delta;
 
+    public ActiveNeuron(String name) {
+        super(name);
+    }
+
     @Override
     public void onAdded(Emitter emitter) {
         inputs.put(emitter, null);

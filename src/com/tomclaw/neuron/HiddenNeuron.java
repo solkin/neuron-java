@@ -7,6 +7,10 @@ public class HiddenNeuron extends ActiveNeuron {
 
     private Double output;
 
+    public HiddenNeuron(String name) {
+        super(name);
+    }
+
     @Override
     void onOutput(double output) {
         this.output = output;

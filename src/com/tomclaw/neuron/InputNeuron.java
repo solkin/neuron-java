@@ -7,6 +7,10 @@ public class InputNeuron extends Emitter {
 
     private Double output;
 
+    public InputNeuron(String name) {
+        super(name);
+    }
+
     @Override
     public void emit(double input) {
         super.emit(input);

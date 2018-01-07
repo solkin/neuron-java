@@ -10,6 +10,10 @@ public abstract class Emitter extends Neuron {
 
     Map<Receiver, Synapse> receivers = new HashMap<>();
 
+    public Emitter(String name) {
+        super(name);
+    }
+
     public void addReceiver(Receiver receiver, double weight) {
         receivers.put(receiver, new Synapse(weight));
         receiver.onAdded(this);
