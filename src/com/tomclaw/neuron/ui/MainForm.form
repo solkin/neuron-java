@@ -71,21 +71,21 @@
           <component id="d8ed3" class="javax.swing.JButton" binding="createButton" default-binding="true">
             <constraints/>
             <properties>
-              <icon value="document-new.png"/>
+              <icon value="file-new.png"/>
               <text value=""/>
             </properties>
           </component>
           <component id="d9f8c" class="javax.swing.JButton" binding="openButton" default-binding="true">
             <constraints/>
             <properties>
-              <icon value="document-open.png"/>
+              <icon value="file-open.png"/>
               <text value=""/>
             </properties>
           </component>
           <component id="abee3" class="javax.swing.JButton" binding="saveButton">
             <constraints/>
             <properties>
-              <icon value="document-save.png"/>
+              <icon value="file-save.png"/>
               <text value=""/>
             </properties>
           </component>
@@ -96,14 +96,14 @@
           <component id="dcd50" class="javax.swing.JButton" binding="runButton">
             <constraints/>
             <properties>
-              <icon value="media-playback-start.png"/>
+              <icon value="run.png"/>
               <text value=""/>
             </properties>
           </component>
           <component id="d86e0" class="javax.swing.JButton" binding="couchButton">
             <constraints/>
             <properties>
-              <icon value="media-record.png"/>
+              <icon value="training.png"/>
               <text value=""/>
             </properties>
           </component>

@@ -4,6 +4,8 @@ import com.tomclaw.neuron.core.InputNeuron;
 import com.tomclaw.neuron.core.OutputNeuron;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class MainForm {
     private JPanel contentPane;
@@ -15,6 +17,10 @@ public class MainForm {
     private JButton runButton;
     private JButton couchButton;
 
+    private InputNeuron[] inputs;
+    private int[] hidden;
+    private OutputNeuron[] outputs;
+
     public MainForm() {
         createButton.addActionListener(e -> {
             CreateDialog dialog = new CreateDialog();
@@ -22,13 +28,20 @@ public class MainForm {
             dialog.setLocationRelativeTo(contentPane);
             dialog.setVisible(true);
 
-            InputNeuron[] inputs = dialog.getInputs();
-            int[] hidden = dialog.getHiddens();
-            OutputNeuron[] outputs = dialog.getOutputs();
+            inputs = dialog.getInputs();
+            hidden = dialog.getHiddens();
+            outputs = dialog.getOutputs();
 
             ((JNeuronPanel) neuronPanel).setData(inputs, hidden, outputs);
             neuronPanel.invalidate();
             neuronPanel.repaint();
+        });
+
+        runButton.addActionListener(e -> {
+            InputDialog dialog = new InputDialog(inputs);
+            dialog.pack();
+            dialog.setLocationRelativeTo(contentPane);
+            dialog.setVisible(true);
         });
     }
 
