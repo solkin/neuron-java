@@ -5,31 +5,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainForm {
-    private JPanel panel1;
-    private JButton settingsButton;
+    private JPanel contentPane;
+    private JPanel neuronPanel;
+    private JTextPane logPane;
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("MainForm");
-        frame.setContentPane(new MainForm().panel1);
+        JFrame frame = new JFrame("Neural Network");
+        frame.setContentPane(new MainForm().contentPane);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
-        frame.setSize(640, 480);
+        frame.setSize(480, 380);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
     private void createUIComponents() {
-        JNeuronPanel neuronPanel = new JNeuronPanel();
-        panel1 = neuronPanel;
+        JNeuronPanel panel = new JNeuronPanel();
+        neuronPanel = panel;
 
         InputNeuron[] inputs = new InputNeuron[2];
-        int[] hidden = new int[]{3, 2};
+        int[] hidden = new int[]{3, 2, 1};
         OutputNeuron[] outputs = new OutputNeuron[1];
 
         createNeuralNetwork(inputs, hidden, outputs);
-        neuronPanel.setInputs(inputs);
-        neuronPanel.setHidden(hidden);
-        neuronPanel.setOutputs(outputs);
+        panel.setInputs(inputs);
+        panel.setHidden(hidden);
+        panel.setOutputs(outputs);
     }
 
     private static void createNeuralNetwork(InputNeuron[] inputs, int[] hidden, OutputNeuron[] outputs) {

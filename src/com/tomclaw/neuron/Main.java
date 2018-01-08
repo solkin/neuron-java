@@ -9,8 +9,6 @@ public class Main {
     private static DecimalFormat df = new DecimalFormat("#.####");
 
     public static void main(String[] args) {
-        MainForm mainForm = new MainForm();
-
         List<double[]> sets = new ArrayList<>();
         sets.add(new double[]{0, 0, 0});
         sets.add(new double[]{0, 1, 1});

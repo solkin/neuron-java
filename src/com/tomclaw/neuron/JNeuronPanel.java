@@ -70,13 +70,16 @@ public class JNeuronPanel extends JPanel {
             int textWidth = (int) (font.getStringBounds(text, frc).getWidth());
             int textHeight = (int) (font.getStringBounds(text, frc).getHeight());
 
-            g.setColor(color.darker());
-            item.getChilds().forEach(childItem -> g.drawLine(
-                    x + ovalPadding,
-                    y + ovalPadding,
-                    childItem.x + ovalPadding,
-                    childItem.y + ovalPadding)
+            item.getChilds().forEach(childItem -> {
+                        int x1 = x + ovalPadding;
+                        int x2 = childItem.x + ovalPadding;
+                        int y1 = y + ovalPadding;
+                        int y2 = childItem.y + ovalPadding;
+                        g2d.setPaint(new GradientPaint(x1, y1, color.darker(), x2, y2, childItem.color.darker()));
+                        g.drawLine(x1, y1, x2, y2);
+                    }
             );
+            g2d.setPaint(null);
             g.setColor(new Color(0x00, 0x00, 0x00, 0x20));
             g.fillOval(x, y + SHADOW_PADDING, NEURON_DIAMETER, NEURON_DIAMETER);
             g.setColor(color);
