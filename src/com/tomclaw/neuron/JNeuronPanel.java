@@ -60,6 +60,7 @@ public class JNeuronPanel extends JPanel {
 
         List<MapItem> items = prepareMap(inputs, hidden, outputs);
 
+        int ovalPadding = NEURON_DIAMETER / 2;
         for (MapItem item : items) {
             String text = item.getText();
             int x = item.getX();
@@ -68,8 +69,15 @@ public class JNeuronPanel extends JPanel {
 
             int textWidth = (int) (font.getStringBounds(text, frc).getWidth());
             int textHeight = (int) (font.getStringBounds(text, frc).getHeight());
-            int ovalPadding = NEURON_DIAMETER / 2;
-            g.setColor(Color.LIGHT_GRAY);
+
+            g.setColor(color.darker());
+            item.getChilds().forEach(childItem -> g.drawLine(
+                    x + ovalPadding,
+                    y + ovalPadding,
+                    childItem.x + ovalPadding,
+                    childItem.y + ovalPadding)
+            );
+            g.setColor(new Color(0x00, 0x00, 0x00, 0x20));
             g.fillOval(x, y + SHADOW_PADDING, NEURON_DIAMETER, NEURON_DIAMETER);
             g.setColor(color);
             g.fillOval(x, y, NEURON_DIAMETER, NEURON_DIAMETER);
