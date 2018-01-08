@@ -8,10 +8,13 @@ public abstract class Neuron {
     public static double velocity = 0.7;
     public static double moment = 0.3;
 
-    private String name;
+    private final String name;
 
     public Neuron(String name) {
         this.name = name;
     }
 
+    public String getName() {
+        return name;
+    }
 }

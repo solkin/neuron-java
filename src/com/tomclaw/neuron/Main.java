@@ -9,6 +9,8 @@ public class Main {
     private static DecimalFormat df = new DecimalFormat("#.####");
 
     public static void main(String[] args) {
+        MainForm mainForm = new MainForm();
+
         List<double[]> sets = new ArrayList<>();
         sets.add(new double[]{0, 0, 0});
         sets.add(new double[]{0, 1, 1});
@@ -16,7 +18,7 @@ public class Main {
         sets.add(new double[]{1, 1, 0});
 
         InputNeuron[] inputs = new InputNeuron[2];
-        int[] hidden = new int[]{4};
+        int[] hidden = new int[]{3, 1};
         OutputNeuron[] outputs = new OutputNeuron[1];
 
         createNeuralNetwork(inputs, hidden, outputs);
