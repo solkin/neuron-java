@@ -17,6 +17,10 @@ public class InputNeuron extends Emitter {
         output = input;
     }
 
+    public Double getOutput() {
+        return output;
+    }
+
     @Override
     protected void couch() {
         for (Receiver receiver : receivers.keySet()) {

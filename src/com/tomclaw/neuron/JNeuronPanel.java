@@ -2,12 +2,19 @@ package com.tomclaw.neuron;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.AffineTransform;
 import java.util.*;
 import java.util.List;
 
+import static java.awt.event.MouseEvent.BUTTON1;
+import static java.awt.event.MouseEvent.BUTTON2;
+import static java.awt.event.MouseEvent.BUTTON3;
 import static java.util.Collections.emptyList;
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
+import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 
 public class JNeuronPanel extends JPanel {
 
@@ -17,9 +24,7 @@ public class JNeuronPanel extends JPanel {
     private static int SHADOW_PADDING = 3;
     private static int NEURON_DIAMETER = 40;
 
-    private InputNeuron[] inputs = new InputNeuron[0];
-    private int[] hidden = new int[]{0};
-    private OutputNeuron[] outputs = new OutputNeuron[0];
+    private List<MapItem> items = emptyList();
 
     private FontRenderContext frc;
     private Font font;
@@ -34,18 +39,76 @@ public class JNeuronPanel extends JPanel {
                 break;
             }
         }
+        addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                items.forEach(item -> {
+                    int x1 = item.getX();
+                    int y1 = item.getY();
+                    int x2 = x1 + NEURON_DIAMETER;
+                    int y2 = y1 + NEURON_DIAMETER;
+                    if (x1 <= e.getX() && y1 <= e.getY() && x2 >= e.getX() && y2 >= e.getY()) {
+                        switch (e.getButton()) {
+                            case BUTTON1:
+                                if (item.neuron instanceof InputNeuron) {
+                                    InputNeuron neuron = (InputNeuron) item.neuron;
+                                    String result = JOptionPane.showInputDialog(JNeuronPanel.this,
+                                            String.format("Enter value for %s", item.getText()), neuron.getOutput());
+                                    if (result != null) {
+                                        try {
+                                            neuron.emit(Double.parseDouble(result));
+                                        } catch (Throwable ignored) {
+                                            JOptionPane.showMessageDialog(JNeuronPanel.this,
+                                                    "Invalid double format", "Error", ERROR_MESSAGE);
+                                        }
+                                    }
+                                } else if (item.neuron instanceof OutputNeuron) {
+                                    OutputNeuron neuron = (OutputNeuron) item.neuron;
+                                    JOptionPane.showMessageDialog(JNeuronPanel.this,
+                                            String.format("Value of %s is: %f", item.getText(), neuron.getOutput()),
+                                            "Value", INFORMATION_MESSAGE);
+                                }
+                                break;
+                            case BUTTON3:
+                                if (item.neuron instanceof OutputNeuron) {
+                                    OutputNeuron neuron = (OutputNeuron) item.neuron;
+                                    String result = JOptionPane.showInputDialog(JNeuronPanel.this,
+                                            String.format("Enter ideal result for %s", item.getText()), neuron.getOutput());
+                                    if (result != null) {
+                                        try {
+                                            neuron.couch(Double.parseDouble(result));
+                                        } catch (Throwable ignored) {
+                                            JOptionPane.showMessageDialog(JNeuronPanel.this,
+                                                    "Invalid double format", "Error", ERROR_MESSAGE);
+                                        }
+                                    }
+                                }
+                                break;
+                        }
+                    }
+                });
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+        });
     }
 
-    public void setInputs(InputNeuron[] inputs) {
-        this.inputs = inputs;
-    }
-
-    public void setHidden(int[] hidden) {
-        this.hidden = hidden;
-    }
-
-    public void setOutputs(OutputNeuron[] outputs) {
-        this.outputs = outputs;
+    public void setData(InputNeuron[] inputs, int[] hidden, OutputNeuron[] outputs) {
+        items = prepareMap(inputs, hidden, outputs);
     }
 
     @Override
@@ -57,8 +120,6 @@ public class JNeuronPanel extends JPanel {
         g.setFont(font);
         g.setColor(new Color(0xECECEC));
         g.fillRect(0, 0, getWidth(), getHeight());
-
-        List<MapItem> items = prepareMap(inputs, hidden, outputs);
 
         int ovalPadding = NEURON_DIAMETER / 2;
         for (MapItem item : items) {
@@ -134,6 +195,7 @@ public class JNeuronPanel extends JPanel {
 
                 String text = neuron.getName();
 
+                mapItem.neuron = neuron;
                 mapItem.x = x;
                 mapItem.y = y;
                 mapItem.color = color;
@@ -168,12 +230,17 @@ public class JNeuronPanel extends JPanel {
 
     private static class MapItem {
 
+        private Neuron neuron;
         private int x, y;
         private String text;
         private Color color;
         private List<MapItem> childs;
 
         public MapItem() {
+        }
+
+        public Neuron getNeuron() {
+            return neuron;
         }
 
         public int getX() {
