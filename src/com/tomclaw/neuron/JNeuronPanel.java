@@ -4,15 +4,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.font.FontRenderContext;
 import java.awt.geom.AffineTransform;
+import java.util.*;
 import java.util.List;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 public class JNeuronPanel extends JPanel {
 
     private static int GLOBAL_PADDING = 30;
     private static int VERTICAL_PADDING = 40;
     private static int HORIZONTAL_PADDING = 60;
+    private static int SHADOW_PADDING = 3;
     private static int NEURON_DIAMETER = 40;
 
     private InputNeuron[] inputs = new InputNeuron[0];
@@ -52,14 +52,13 @@ public class JNeuronPanel extends JPanel {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                 RenderingHints.VALUE_ANTIALIAS_ON);
 
+        g.setFont(font);
         g.setColor(new Color(0xececec));
         g.fillRect(0, 0, getWidth(), getHeight());
 
-        int x = GLOBAL_PADDING;
-        int y = GLOBAL_PADDING;
-
-        g.setColor(Color.RED);
-        g.setFont(font);
+        if (inputs.length == 0) {
+            return;
+        }
 
         int maxCount = Math.max(inputs.length, outputs.length);
         for (int h : hidden) {
@@ -68,52 +67,53 @@ public class JNeuronPanel extends JPanel {
         int maxHeight = maxCount * NEURON_DIAMETER + (maxCount - 1) * VERTICAL_PADDING;
         int baseline = GLOBAL_PADDING + maxHeight / 2;
 
-        int inputsSize = inputs.length * NEURON_DIAMETER + (inputs.length - 1) * VERTICAL_PADDING;
-        y = baseline - inputsSize / 2;
-        Set<Receiver> receivers = new LinkedHashSet<>();
-        for (InputNeuron neuron : inputs) {
-            int ovalPadding = NEURON_DIAMETER / 2;
-            g.drawOval(x, y, NEURON_DIAMETER, NEURON_DIAMETER);
-            String text = neuron.getName();
-            int textWidth = (int) (font.getStringBounds(text, frc).getWidth());
-            int textHeight = (int) (font.getStringBounds(text, frc).getHeight());
-            g.drawString(text, x + ovalPadding - textWidth / 2, y + ovalPadding + textHeight / 3);
-            y += NEURON_DIAMETER + VERTICAL_PADDING;
-            receivers.addAll(neuron.receivers.keySet());
-        }
+        Set<Neuron> neurons = new LinkedHashSet<>(Arrays.asList(inputs));
 
-        boolean hasReceivers = !receivers.isEmpty();
-        while (hasReceivers) {
-            x += NEURON_DIAMETER / 2 + HORIZONTAL_PADDING;
-
-            int receiversSize = receivers.size() * NEURON_DIAMETER + (receivers.size() - 1) * VERTICAL_PADDING;
-
-            y = baseline - receiversSize / 2;
-
-            Set<Receiver> set = new LinkedHashSet<>(receivers);
-            receivers.clear();
+        int y, x = GLOBAL_PADDING;
+        Color color = Color.BLACK;
+        boolean hasReceivers;
+        do {
             hasReceivers = false;
-            for (Receiver receiver : set) {
-                Neuron neuron = (Neuron) receiver;
-                if (neuron instanceof HiddenNeuron) {
-                    g.setColor(Color.BLUE);
+
+            int neuronsSize = neurons.size() * NEURON_DIAMETER + (neurons.size() - 1) * VERTICAL_PADDING;
+            y = baseline - neuronsSize / 2;
+
+            Set<Neuron> current = new LinkedHashSet<>(neurons);
+            neurons.clear();
+            for (Neuron neuron : current) {
+                if (neuron instanceof InputNeuron) {
+                    color = new Color(0xF8CAC1);
+                } else if (neuron instanceof HiddenNeuron) {
+                    color = new Color(0x83D6DE);
                 } else if (neuron instanceof OutputNeuron) {
-                    g.setColor(Color.GREEN);
+                    color = new Color(0x97CE68);
                 }
-                int ovalPadding = NEURON_DIAMETER / 2;
-                g.drawOval(x, y, NEURON_DIAMETER, NEURON_DIAMETER);
+
                 String text = neuron.getName();
                 int textWidth = (int) (font.getStringBounds(text, frc).getWidth());
                 int textHeight = (int) (font.getStringBounds(text, frc).getHeight());
+                int ovalPadding = NEURON_DIAMETER / 2;
+                g.setColor(Color.LIGHT_GRAY);
+                g.fillOval(x, y + SHADOW_PADDING, NEURON_DIAMETER, NEURON_DIAMETER);
+                g.setColor(color);
+                g.fillOval(x, y, NEURON_DIAMETER, NEURON_DIAMETER);
+                g.setColor(color.darker());
+                g.drawOval(x, y, NEURON_DIAMETER, NEURON_DIAMETER);
+                g.setColor(color.darker().darker());
                 g.drawString(text, x + ovalPadding - textWidth / 2, y + ovalPadding + textHeight / 3);
                 y += NEURON_DIAMETER + VERTICAL_PADDING;
+
                 if (neuron instanceof Emitter) {
                     Emitter emitter = (Emitter) neuron;
-                    receivers.addAll(emitter.receivers.keySet());
-                    hasReceivers = true;
+                    for (Receiver receiver : emitter.receivers.keySet()) {
+                        neurons.add((Neuron) receiver);
+                    }
+                    hasReceivers = !neurons.isEmpty();
                 }
             }
-        }
+
+            x += NEURON_DIAMETER / 2 + HORIZONTAL_PADDING;
+        } while (hasReceivers);
     }
 
     private static class NeuronItem {
