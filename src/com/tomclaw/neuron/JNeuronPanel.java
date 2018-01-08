@@ -7,6 +7,8 @@ import java.awt.geom.AffineTransform;
 import java.util.*;
 import java.util.List;
 
+import static java.util.Collections.emptyList;
+
 public class JNeuronPanel extends JPanel {
 
     private static int GLOBAL_PADDING = 30;
@@ -53,12 +55,37 @@ public class JNeuronPanel extends JPanel {
                 RenderingHints.VALUE_ANTIALIAS_ON);
 
         g.setFont(font);
-        g.setColor(new Color(0xececec));
+        g.setColor(new Color(0xECECEC));
         g.fillRect(0, 0, getWidth(), getHeight());
 
-        if (inputs.length == 0) {
-            return;
+        List<MapItem> items = prepareMap(inputs, hidden, outputs);
+
+        for (MapItem item : items) {
+            String text = item.getText();
+            int x = item.getX();
+            int y = item.getY();
+            Color color = item.getColor();
+
+            int textWidth = (int) (font.getStringBounds(text, frc).getWidth());
+            int textHeight = (int) (font.getStringBounds(text, frc).getHeight());
+            int ovalPadding = NEURON_DIAMETER / 2;
+            g.setColor(Color.LIGHT_GRAY);
+            g.fillOval(x, y + SHADOW_PADDING, NEURON_DIAMETER, NEURON_DIAMETER);
+            g.setColor(color);
+            g.fillOval(x, y, NEURON_DIAMETER, NEURON_DIAMETER);
+            g.setColor(color.darker());
+            g.drawOval(x, y, NEURON_DIAMETER, NEURON_DIAMETER);
+            g.setColor(color.darker().darker());
+            g.drawString(text, x + ovalPadding - textWidth / 2, y + ovalPadding + textHeight / 3);
         }
+    }
+
+    private static List<MapItem> prepareMap(InputNeuron[] inputs, int[] hidden, OutputNeuron[] outputs) {
+        if (inputs.length == 0) {
+            return emptyList();
+        }
+
+        List<MapItem> items = new LinkedList<>();
 
         int maxCount = Math.max(inputs.length, outputs.length);
         for (int h : hidden) {
@@ -68,6 +95,8 @@ public class JNeuronPanel extends JPanel {
         int baseline = GLOBAL_PADDING + maxHeight / 2;
 
         Set<Neuron> neurons = new LinkedHashSet<>(Arrays.asList(inputs));
+        Map<Neuron, MapItem> mapItemsMap = new LinkedHashMap<>();
+        neurons.forEach(neuron -> mapItemsMap.put(neuron, new MapItem()));
 
         int y, x = GLOBAL_PADDING;
         Color color = Color.BLACK;
@@ -79,8 +108,11 @@ public class JNeuronPanel extends JPanel {
             y = baseline - neuronsSize / 2;
 
             Set<Neuron> current = new LinkedHashSet<>(neurons);
+            Map<Neuron, MapItem> currentMapItemsMap = new LinkedHashMap<>(mapItemsMap);
             neurons.clear();
+            mapItemsMap.clear();
             for (Neuron neuron : current) {
+                MapItem mapItem = currentMapItemsMap.get(neuron);
                 if (neuron instanceof InputNeuron) {
                     color = new Color(0xF8CAC1);
                 } else if (neuron instanceof HiddenNeuron) {
@@ -90,49 +122,67 @@ public class JNeuronPanel extends JPanel {
                 }
 
                 String text = neuron.getName();
-                int textWidth = (int) (font.getStringBounds(text, frc).getWidth());
-                int textHeight = (int) (font.getStringBounds(text, frc).getHeight());
-                int ovalPadding = NEURON_DIAMETER / 2;
-                g.setColor(Color.LIGHT_GRAY);
-                g.fillOval(x, y + SHADOW_PADDING, NEURON_DIAMETER, NEURON_DIAMETER);
-                g.setColor(color);
-                g.fillOval(x, y, NEURON_DIAMETER, NEURON_DIAMETER);
-                g.setColor(color.darker());
-                g.drawOval(x, y, NEURON_DIAMETER, NEURON_DIAMETER);
-                g.setColor(color.darker().darker());
-                g.drawString(text, x + ovalPadding - textWidth / 2, y + ovalPadding + textHeight / 3);
+
+                mapItem.x = x;
+                mapItem.y = y;
+                mapItem.color = color;
+                mapItem.text = text;
+                items.add(mapItem);
+
                 y += NEURON_DIAMETER + VERTICAL_PADDING;
 
                 if (neuron instanceof Emitter) {
+                    List<MapItem> childs = new LinkedList<>();
                     Emitter emitter = (Emitter) neuron;
                     for (Receiver receiver : emitter.receivers.keySet()) {
-                        neurons.add((Neuron) receiver);
+                        Neuron nextNeuron = (Neuron) receiver;
+                        neurons.add(nextNeuron);
+                        MapItem nextMapItem = mapItemsMap.get(nextNeuron);
+                        if (nextMapItem == null) {
+                            nextMapItem = new MapItem();
+                        }
+                        childs.add(nextMapItem);
+                        mapItemsMap.put(nextNeuron, nextMapItem);
                     }
                     hasReceivers = !neurons.isEmpty();
+                    mapItem.childs = childs.isEmpty() ? emptyList() : childs;
                 }
             }
 
             x += NEURON_DIAMETER / 2 + HORIZONTAL_PADDING;
         } while (hasReceivers);
+
+        return items;
     }
 
-    private static class NeuronItem {
+    private static class MapItem {
 
-        static final int TYPE_INPUT = 0x01;
-        static final int TYPE_HIDDEN = 0x02;
-        static final int TYPE_OUTPUT = 0x03;
+        private int x, y;
+        private String text;
+        private Color color;
+        private List<MapItem> childs;
 
-        int x, y;
-        Color color;
-        int type;
-        List<NeuronItem> receivers;
+        public MapItem() {
+        }
 
-        public NeuronItem(int x, int y, Color color, int type, List<NeuronItem> receivers) {
-            this.x = x;
-            this.y = y;
-            this.color = color;
-            this.type = type;
-            this.receivers = receivers;
+        public int getX() {
+            return x;
+        }
+
+        public int getY() {
+            return y;
+        }
+
+        public String getText() {
+            return text;
+        }
+
+        public Color getColor() {
+            return color;
+        }
+
+        public List<MapItem> getChilds() {
+            return childs;
         }
     }
 }
