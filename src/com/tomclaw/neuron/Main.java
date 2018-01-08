@@ -1,5 +1,7 @@
 package com.tomclaw.neuron;
 
+import com.tomclaw.neuron.ui.MainForm;
+
 import javax.swing.*;
 
 public class Main {

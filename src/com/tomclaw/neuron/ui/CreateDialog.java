@@ -1,8 +1,8 @@
 package com.tomclaw.neuron.ui;
 
-import com.tomclaw.neuron.HiddenNeuron;
-import com.tomclaw.neuron.InputNeuron;
-import com.tomclaw.neuron.OutputNeuron;
+import com.tomclaw.neuron.core.HiddenNeuron;
+import com.tomclaw.neuron.core.InputNeuron;
+import com.tomclaw.neuron.core.OutputNeuron;
 
 import javax.swing.*;
 import java.awt.event.*;

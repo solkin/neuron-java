@@ -1,4 +1,6 @@
-package com.tomclaw.neuron;
+package com.tomclaw.neuron.core;
+
+import java.util.Map;
 
 /**
  * Created by solkin on 04/01/2018.
@@ -23,6 +25,7 @@ public class InputNeuron extends Emitter {
 
     @Override
     protected void couch() {
+        Map<Receiver, Synapse> receivers = getReceivers();
         for (Receiver receiver : receivers.keySet()) {
             Synapse synapse = receivers.get(receiver);
 

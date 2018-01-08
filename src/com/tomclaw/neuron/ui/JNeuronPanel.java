@@ -1,4 +1,6 @@
-package com.tomclaw.neuron;
+package com.tomclaw.neuron.ui;
+
+import com.tomclaw.neuron.core.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +12,6 @@ import java.util.*;
 import java.util.List;
 
 import static java.awt.event.MouseEvent.BUTTON1;
-import static java.awt.event.MouseEvent.BUTTON2;
 import static java.awt.event.MouseEvent.BUTTON3;
 import static java.util.Collections.emptyList;
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
@@ -207,7 +208,7 @@ public class JNeuronPanel extends JPanel {
                 if (neuron instanceof Emitter) {
                     List<MapItem> childs = new LinkedList<>();
                     Emitter emitter = (Emitter) neuron;
-                    for (Receiver receiver : emitter.receivers.keySet()) {
+                    for (Receiver receiver : emitter.getReceivers().keySet()) {
                         Neuron nextNeuron = (Neuron) receiver;
                         neurons.add(nextNeuron);
                         MapItem nextMapItem = mapItemsMap.get(nextNeuron);

@@ -1,4 +1,4 @@
-package com.tomclaw.neuron;
+package com.tomclaw.neuron.core;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,7 +8,7 @@ import java.util.Map;
  */
 public abstract class Emitter extends Neuron {
 
-    Map<Receiver, Synapse> receivers = new HashMap<>();
+    private Map<Receiver, Synapse> receivers = new HashMap<>();
 
     public Emitter(String name) {
         super(name);
@@ -25,6 +25,10 @@ public abstract class Emitter extends Neuron {
             synapse.value = input;
             receiver.accept(this, synapse);
         }
+    }
+
+    public Map<Receiver, Synapse> getReceivers() {
+        return receivers;
     }
 
     public final void onReceiverCouched() {

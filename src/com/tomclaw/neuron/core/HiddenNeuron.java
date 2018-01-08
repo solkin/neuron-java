@@ -1,4 +1,6 @@
-package com.tomclaw.neuron;
+package com.tomclaw.neuron.core;
+
+import java.util.Map;
 
 /**
  * Created by solkin on 04/01/2018.
@@ -22,6 +24,7 @@ public class HiddenNeuron extends ActiveNeuron {
         double derivative = derivative(output);
         double sum = 0.0f;
 
+        Map<Receiver, Synapse> receivers = getReceivers();
         for (Receiver receiver : receivers.keySet()) {
             Synapse synapse = receivers.get(receiver);
 

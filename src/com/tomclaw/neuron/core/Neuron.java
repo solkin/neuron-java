@@ -1,4 +1,4 @@
-package com.tomclaw.neuron;
+package com.tomclaw.neuron.core;
 
 /**
  * Created by solkin on 04/01/2018.

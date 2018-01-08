@@ -1,4 +1,4 @@
-package com.tomclaw.neuron;
+package com.tomclaw.neuron.core;
 
 import java.util.HashMap;
 import java.util.HashSet;

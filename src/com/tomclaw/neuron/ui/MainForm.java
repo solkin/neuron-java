@@ -1,6 +1,7 @@
-package com.tomclaw.neuron;
+package com.tomclaw.neuron.ui;
 
-import com.tomclaw.neuron.ui.CreateDialog;
+import com.tomclaw.neuron.core.InputNeuron;
+import com.tomclaw.neuron.core.OutputNeuron;
 
 import javax.swing.*;
 
