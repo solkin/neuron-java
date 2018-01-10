@@ -26,7 +26,7 @@
             </constraints>
             <properties>
               <continuousLayout value="false"/>
-              <dividerLocation value="350"/>
+              <dividerLocation value="327"/>
               <foreground color="-1250068"/>
               <orientation value="0"/>
               <resizeWeight value="1.0"/>
@@ -71,21 +71,21 @@
           <component id="d8ed3" class="javax.swing.JButton" binding="createButton" default-binding="true">
             <constraints/>
             <properties>
-              <icon value="file-new.png"/>
+              <icon value="if_page.png"/>
               <text value=""/>
             </properties>
           </component>
           <component id="d9f8c" class="javax.swing.JButton" binding="openButton" default-binding="true">
             <constraints/>
             <properties>
-              <icon value="file-open.png"/>
+              <icon value="if_folder.png"/>
               <text value=""/>
             </properties>
           </component>
           <component id="abee3" class="javax.swing.JButton" binding="saveButton">
             <constraints/>
             <properties>
-              <icon value="file-save.png"/>
+              <icon value="if_disk.png"/>
               <text value=""/>
             </properties>
           </component>
@@ -96,14 +96,14 @@
           <component id="dcd50" class="javax.swing.JButton" binding="runButton">
             <constraints/>
             <properties>
-              <icon value="run.png"/>
+              <icon value="if_control_play.png"/>
               <text value=""/>
             </properties>
           </component>
           <component id="d86e0" class="javax.swing.JButton" binding="couchButton">
             <constraints/>
             <properties>
-              <icon value="training.png"/>
+              <icon value="if_chart_line.png"/>
               <text value=""/>
             </properties>
           </component>
