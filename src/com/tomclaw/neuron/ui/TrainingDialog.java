@@ -1,18 +1,28 @@
 package com.tomclaw.neuron.ui;
 
+import com.tomclaw.neuron.core.InputNeuron;
+import com.tomclaw.neuron.core.OutputNeuron;
+
 import javax.swing.*;
+import javax.swing.table.*;
 import java.awt.event.*;
 
 public class TrainingDialog extends JDialog {
+
+    private InputNeuron[] inputs;
+    private OutputNeuron[] outputs;
+
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
     private JTable table1;
-    private JTextField a100TextField;
-    private JButton addRowButton;
-    private JButton removeRowButton;
+    private JButton addButton;
+    private JTextField epochCount;
+    private JButton deleteButton;
 
-    public TrainingDialog() {
+    public TrainingDialog(InputNeuron[] inputs, OutputNeuron[] outputs) {
+        this.inputs = inputs;
+        this.outputs = outputs;
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
@@ -43,6 +53,10 @@ public class TrainingDialog extends JDialog {
                 onCancel();
             }
         }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+
+        addButton.addActionListener(e -> {
+
+        });
     }
 
     private void onOK() {
@@ -51,14 +65,26 @@ public class TrainingDialog extends JDialog {
     }
 
     private void onCancel() {
-        // add your code here if necessary
         dispose();
     }
 
-    public static void main(String[] args) {
-        TrainingDialog dialog = new TrainingDialog();
-        dialog.pack();
-        dialog.setVisible(true);
-        System.exit(0);
+    private void createUIComponents() {
+        Object columnNames[] = new String[inputs.length + outputs.length];
+        Object rowData[][] = new Object[0][columnNames.length];
+        int i;
+        for (i = 0; i < inputs.length; i++) {
+            InputNeuron neuron = inputs[i];
+            columnNames[i] = neuron.getName();
+        }
+        for (int c = 0; c < outputs.length; c++) {
+            OutputNeuron neuron = outputs[c];
+            columnNames[i + c] = neuron.getName();
+        }
+        table1 = new JTable(rowData, columnNames);
+        DefaultTableModel tblModel = new DefaultTableModel(0, columnNames.length);
+        tblModel.setColumnIdentifiers(columnNames);
+        table1.setShowGrid(true);
+        table1.setModel(tblModel);
+        table1.setTableHeader(new JTableHeader(table1.getColumnModel()));
     }
 }

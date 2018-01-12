@@ -4,8 +4,6 @@ import com.tomclaw.neuron.core.InputNeuron;
 import com.tomclaw.neuron.core.OutputNeuron;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class MainForm {
     private JPanel contentPane;
@@ -39,6 +37,13 @@ public class MainForm {
 
         runButton.addActionListener(e -> {
             InputDialog dialog = new InputDialog(inputs);
+            dialog.pack();
+            dialog.setLocationRelativeTo(contentPane);
+            dialog.setVisible(true);
+        });
+
+        couchButton.addActionListener(e -> {
+            TrainingDialog dialog = new TrainingDialog(inputs, outputs);
             dialog.pack();
             dialog.setLocationRelativeTo(contentPane);
             dialog.setVisible(true);
