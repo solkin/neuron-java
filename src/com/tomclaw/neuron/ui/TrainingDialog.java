@@ -8,6 +8,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import java.awt.event.*;
 
+import static javax.swing.JOptionPane.ERROR_MESSAGE;
+
 public class TrainingDialog extends JDialog {
 
     private InputNeuron[] inputs;
@@ -22,6 +24,8 @@ public class TrainingDialog extends JDialog {
     private JButton deleteButton;
 
     private DefaultTableModel model;
+
+    private double[][] trainingSet = new double[0][0];
 
     public TrainingDialog(InputNeuron[] inputs, OutputNeuron[] outputs) {
         this.inputs = inputs;
@@ -75,7 +79,19 @@ public class TrainingDialog extends JDialog {
     }
 
     private void onOK() {
-        // add your code here
+        try {
+            this.trainingSet = new double[model.getRowCount()][model.getColumnCount()];
+            for (int r = 0; r < model.getRowCount(); r++) {
+                trainingSet[r] = new double[model.getColumnCount()];
+                for (int c = 0; c < model.getColumnCount(); c++) {
+                    String value = ((String) model.getValueAt(r, c));
+                    trainingSet[r][c] = Double.parseDouble(value);
+                }
+            }
+        } catch (Throwable ex) {
+            String message = String.format("Invalid input:\n%s", ex.getMessage());
+            JOptionPane.showMessageDialog(this, message, "Error", ERROR_MESSAGE);
+        }
         dispose();
     }
 
@@ -101,5 +117,9 @@ public class TrainingDialog extends JDialog {
         table1.setShowGrid(true);
         table1.setModel(model);
         table1.setTableHeader(new JTableHeader(table1.getColumnModel()));
+    }
+
+    public double[][] getTrainingSet() {
+        return trainingSet;
     }
 }
