@@ -3,12 +3,17 @@ package com.tomclaw.neuron.ui;
 import com.tomclaw.neuron.core.*;
 
 import javax.swing.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
 import static java.util.Collections.emptyList;
 
 public class MainForm {
+
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM HH:mm:ss.SSS");
+
     private JPanel contentPane;
     private JPanel neuronPanel;
     private JTextPane logPane;
@@ -27,6 +32,8 @@ public class MainForm {
     private int epochCount = 100;
 
     public MainForm() {
+        log("Log started");
+
         createButton.addActionListener(e -> {
             CreateDialog dialog = new CreateDialog();
             dialog.pack();
@@ -69,18 +76,26 @@ public class MainForm {
                 }
             }
         });
+
         randomButton.addActionListener(e -> {
             Random random = new Random(System.currentTimeMillis());
             List<Neuron> neurons = ((JNeuronPanel) neuronPanel).getNeurons();
             for (Neuron neuron : neurons) {
                 if (neuron instanceof Emitter) {
                     Emitter emitter = (Emitter) neuron;
-                    for (Synapse synapse : emitter.getReceivers().values()) {
-                        synapse.setWeight(random.nextDouble() * 2);
+                    for (Receiver receiver : emitter.getReceivers().keySet()) {
+                        Synapse synapse = emitter.getReceivers().get(receiver);
+                        double weight = random.nextDouble() * 2;
+                        synapse.setWeight(weight);
+                        log("Weight " + neuron.getName() + " → " + ((Neuron) receiver).getName() + ": " + weight);
                     }
                 }
             }
         });
+    }
+
+    private void log(String message) {
+        logPane.setText(logPane.getText() + dateFormat.format(new Date()) + " " + message + "\n");
     }
 
     public static void main(String[] args) {

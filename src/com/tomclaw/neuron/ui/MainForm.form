@@ -26,7 +26,7 @@
             </constraints>
             <properties>
               <continuousLayout value="false"/>
-              <dividerLocation value="327"/>
+              <dividerLocation value="332"/>
               <foreground color="-1250068"/>
               <orientation value="0"/>
               <resizeWeight value="1.0"/>
@@ -44,14 +44,22 @@
                 <border type="none"/>
                 <children/>
               </grid>
-              <component id="f7e62" class="javax.swing.JTextPane" binding="logPane">
+              <scrollpane id="d83a5">
                 <constraints>
                   <splitpane position="right"/>
                 </constraints>
-                <properties>
-                  <editable value="false"/>
-                </properties>
-              </component>
+                <properties/>
+                <border type="empty"/>
+                <children>
+                  <component id="12845" class="javax.swing.JTextPane" binding="logPane">
+                    <constraints/>
+                    <properties>
+                      <editable value="false"/>
+                      <font name="Courier" size="12"/>
+                    </properties>
+                  </component>
+                </children>
+              </scrollpane>
             </children>
           </splitpane>
         </children>
