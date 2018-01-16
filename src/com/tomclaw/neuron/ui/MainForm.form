@@ -107,6 +107,17 @@
               <text value=""/>
             </properties>
           </component>
+          <component id="ccee0" class="javax.swing.JToolBar$Separator">
+            <constraints/>
+            <properties/>
+          </component>
+          <component id="9d588" class="javax.swing.JButton" binding="randomButton">
+            <constraints/>
+            <properties>
+              <icon value="if_control_repeat.png"/>
+              <text value=""/>
+            </properties>
+          </component>
         </children>
       </toolbar>
     </children>

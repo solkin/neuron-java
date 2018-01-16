@@ -1,10 +1,10 @@
 package com.tomclaw.neuron.ui;
 
-import com.tomclaw.neuron.core.InputNeuron;
-import com.tomclaw.neuron.core.OutputNeuron;
+import com.tomclaw.neuron.core.*;
 
 import javax.swing.*;
 import java.util.List;
+import java.util.Random;
 
 import static java.util.Collections.emptyList;
 
@@ -17,6 +17,7 @@ public class MainForm {
     private JButton saveButton;
     private JButton runButton;
     private JButton couchButton;
+    private JButton randomButton;
 
     private InputNeuron[] inputs;
     private int[] hidden;
@@ -58,13 +59,24 @@ public class MainForm {
             epochCount = dialog.getEpochCount();
             for (int epoch = 0; epoch < epochCount; epoch++) {
                 for (double[] row : trainingSet) {
-                    for (int i = 0; i < inputs.length; i++) {
-                        inputs[i].emit(row[i]);
+                    for (int i = 0; i < row.length; i++) {
+                        if (i < inputs.length) {
+                            inputs[i].emit(row[i]);
+                        } else {
+                            outputs[i - inputs.length].couch(row[i]);
+                        }
                     }
                 }
-                for (double[] row : trainingSet) {
-                    for (int i = 0; i < outputs.length; i++) {
-                        outputs[i].couch(row[i + inputs.length]);
+            }
+        });
+        randomButton.addActionListener(e -> {
+            Random random = new Random(System.currentTimeMillis());
+            List<Neuron> neurons = ((JNeuronPanel) neuronPanel).getNeurons();
+            for (Neuron neuron : neurons) {
+                if (neuron instanceof Emitter) {
+                    Emitter emitter = (Emitter) neuron;
+                    for (Synapse synapse : emitter.getReceivers().values()) {
+                        synapse.setWeight(random.nextDouble() * 2);
                     }
                 }
             }

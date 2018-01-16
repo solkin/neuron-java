@@ -112,6 +112,14 @@ public class JNeuronPanel extends JPanel {
         items = prepareMap(inputs, hidden, outputs);
     }
 
+    public List<Neuron> getNeurons() {
+        List<Neuron> neurons = new LinkedList<>();
+        for (MapItem item : items) {
+            neurons.add(item.neuron);
+        }
+        return neurons;
+    }
+
     @Override
     public void paint(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
