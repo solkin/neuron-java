@@ -4,6 +4,9 @@ import com.tomclaw.neuron.core.InputNeuron;
 import com.tomclaw.neuron.core.OutputNeuron;
 
 import javax.swing.*;
+import java.util.List;
+
+import static java.util.Collections.emptyList;
 
 public class MainForm {
     private JPanel contentPane;
@@ -18,6 +21,9 @@ public class MainForm {
     private InputNeuron[] inputs;
     private int[] hidden;
     private OutputNeuron[] outputs;
+
+    private List<double[]> trainingSet = emptyList();
+    private int epochCount = 100;
 
     public MainForm() {
         createButton.addActionListener(e -> {
@@ -43,10 +49,25 @@ public class MainForm {
         });
 
         couchButton.addActionListener(e -> {
-            TrainingDialog dialog = new TrainingDialog(inputs, outputs);
+            TrainingDialog dialog = new TrainingDialog(inputs, outputs, trainingSet, epochCount);
             dialog.pack();
             dialog.setLocationRelativeTo(contentPane);
             dialog.setVisible(true);
+
+            trainingSet = dialog.getTrainingSet();
+            epochCount = dialog.getEpochCount();
+            for (int epoch = 0; epoch < epochCount; epoch++) {
+                for (double[] row : trainingSet) {
+                    for (int i = 0; i < inputs.length; i++) {
+                        inputs[i].emit(row[i]);
+                    }
+                }
+                for (double[] row : trainingSet) {
+                    for (int i = 0; i < outputs.length; i++) {
+                        outputs[i].couch(row[i + inputs.length]);
+                    }
+                }
+            }
         });
     }
 

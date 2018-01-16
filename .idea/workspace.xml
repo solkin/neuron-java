@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="5d298e48-77a0-43b6-bf41-3f7cbc55c6ed" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/src/com/tomclaw/neuron/ui/MainForm.java" afterPath="$PROJECT_DIR$/src/com/tomclaw/neuron/ui/MainForm.java" />
+      <change beforePath="$PROJECT_DIR$/src/com/tomclaw/neuron/ui/TrainingDialog.form" afterPath="$PROJECT_DIR$/src/com/tomclaw/neuron/ui/TrainingDialog.form" />
       <change beforePath="$PROJECT_DIR$/src/com/tomclaw/neuron/ui/TrainingDialog.java" afterPath="$PROJECT_DIR$/src/com/tomclaw/neuron/ui/TrainingDialog.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -25,12 +27,9 @@
       <file leaf-file-name="InputDialog.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/tomclaw/neuron/ui/InputDialog.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
-              <caret line="73" column="49" lean-forward="true" selection-start-line="73" selection-start-column="49" selection-end-line="73" selection-end-column="49" />
-              <folding>
-                <element signature="e#1075#1203#0" expanded="true" />
-                <element signature="e#1202#1203#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="870">
+              <caret line="73" column="49" lean-forward="false" selection-start-line="73" selection-start-column="49" selection-end-line="73" selection-end-column="49" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -42,26 +41,43 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TrainingDialog.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TrainingDialog.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/tomclaw/neuron/ui/TrainingDialog.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="121" column="40" lean-forward="false" selection-start-line="121" selection-start-column="40" selection-end-line="121" selection-end-column="40" />
+            <state relative-caret-position="99">
+              <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#3209#3210#0" expanded="true" />
-                <element signature="e#3234#3235#0" expanded="true" />
-                <element signature="e#4118#4119#0" expanded="true" />
+                <element signature="e#1652#1780#0" expanded="true" />
+                <element signature="e#1779#1780#0" expanded="true" />
+                <element signature="e#3513#3514#0" expanded="true" />
+                <element signature="e#3538#3539#0" expanded="true" />
+                <element signature="e#4392#4393#0" expanded="true" />
+                <element signature="e#4426#4427#0" expanded="true" />
+                <element signature="e#4460#4461#0" expanded="true" />
+                <element signature="e#4493#4494#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainForm.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MainForm.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/tomclaw/neuron/ui/MainForm.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="137">
-              <caret line="28" column="31" lean-forward="false" selection-start-line="28" selection-start-column="31" selection-end-line="28" selection-end-column="31" />
+            <state relative-caret-position="186">
+              <caret line="58" column="62" lean-forward="true" selection-start-line="58" selection-start-column="62" selection-end-line="58" selection-end-column="62" />
+              <folding>
+                <element signature="e#2731#2732#0" expanded="true" />
+                <element signature="e#2779#2780#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/tomclaw/neuron/Main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="11" column="82" lean-forward="false" selection-start-line="11" selection-start-column="82" selection-end-line="11" selection-end-column="82" />
               <folding />
             </state>
           </provider>
@@ -70,7 +86,7 @@
       <file leaf-file-name="CreateDialog.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/tomclaw/neuron/ui/CreateDialog.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="224">
+            <state relative-caret-position="930">
               <caret line="81" column="25" lean-forward="false" selection-start-line="81" selection-start-column="25" selection-end-line="81" selection-end-column="25" />
               <folding>
                 <element signature="e#2612#2613#0" expanded="true" />
@@ -98,8 +114,8 @@
       <file leaf-file-name="InputNeuron.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/tomclaw/neuron/core/InputNeuron.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+            <state relative-caret-position="120">
+              <caret line="17" column="17" lean-forward="false" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
               <folding>
                 <element signature="e#209#210#0" expanded="true" />
                 <element signature="e#236#237#0" expanded="true" />
@@ -166,8 +182,8 @@
       <file leaf-file-name="Emitter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/tomclaw/neuron/core/Emitter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="8" column="22" lean-forward="false" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
+            <state relative-caret-position="254">
+              <caret line="21" column="16" lean-forward="false" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="16" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#272#273#0" expanded="true" />
@@ -236,9 +252,9 @@
         <option value="$PROJECT_DIR$/src/com/tomclaw/neuron/ui/InputDialog.form" />
         <option value="$PROJECT_DIR$/src/com/tomclaw/neuron/ui/InputDialog.java" />
         <option value="$PROJECT_DIR$/src/com/tomclaw/neuron/ui/MainForm.form" />
-        <option value="$PROJECT_DIR$/src/com/tomclaw/neuron/ui/MainForm.java" />
         <option value="$PROJECT_DIR$/src/com/tomclaw/neuron/ui/TrainingDialog.form" />
         <option value="$PROJECT_DIR$/src/com/tomclaw/neuron/ui/TrainingDialog.java" />
+        <option value="$PROJECT_DIR$/src/com/tomclaw/neuron/ui/MainForm.java" />
       </list>
     </option>
   </component>
@@ -856,33 +872,11 @@ outputs[0].getOutput();</expression-string>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/src.zip!/java/awt/event/MouseEvent.java" />
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/src.zip!/javax/swing/JComponent.java" />
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/src.zip!/javax/swing/JOptionPane.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/tomclaw/neuron/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="11" column="82" lean-forward="false" selection-start-line="11" selection-start-column="82" selection-end-line="11" selection-end-column="82" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/tomclaw/neuron/core/ActiveNeuron.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="10" column="22" lean-forward="false" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/tomclaw/neuron/core/Emitter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="8" column="22" lean-forward="false" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#272#273#0" expanded="true" />
-            <element signature="e#299#300#0" expanded="true" />
-            <element signature="e#751#752#0" expanded="true" />
-            <element signature="e#783#784#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -893,19 +887,6 @@ outputs[0].getOutput();</expression-string>
           <folding>
             <element signature="e#216#217#0" expanded="true" />
             <element signature="e#243#244#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/tomclaw/neuron/core/InputNeuron.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-          <folding>
-            <element signature="e#209#210#0" expanded="true" />
-            <element signature="e#236#237#0" expanded="true" />
-            <element signature="e#378#379#0" expanded="true" />
-            <element signature="e#407#408#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1002,7 +983,6 @@ outputs[0].getOutput();</expression-string>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1761">
           <caret line="88" column="11" lean-forward="false" selection-start-line="88" selection-start-column="11" selection-end-line="88" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1010,7 +990,6 @@ outputs[0].getOutput();</expression-string>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="169">
           <caret line="59" column="22" lean-forward="false" selection-start-line="59" selection-start-column="22" selection-end-line="59" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1030,21 +1009,46 @@ outputs[0].getOutput();</expression-string>
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/tomclaw/neuron/ui/MainForm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="28" column="31" lean-forward="false" selection-start-line="28" selection-start-column="31" selection-end-line="28" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/tomclaw/neuron/ui/CreateDialog.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
+        <state relative-caret-position="930">
           <caret line="81" column="25" lean-forward="false" selection-start-line="81" selection-start-column="25" selection-end-line="81" selection-end-column="25" />
           <folding>
             <element signature="e#2612#2613#0" expanded="true" />
             <element signature="e#2641#2642#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/tomclaw/neuron/ui/InputDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="870">
+          <caret line="73" column="49" lean-forward="false" selection-start-line="73" selection-start-column="49" selection-end-line="73" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/tomclaw/neuron/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="11" column="82" lean-forward="false" selection-start-line="11" selection-start-column="82" selection-end-line="11" selection-end-column="82" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/tomclaw/neuron/ui/TrainingDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="99">
+          <caret line="11" column="0" lean-forward="true" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding>
+            <element signature="e#1652#1780#0" expanded="true" />
+            <element signature="e#1779#1780#0" expanded="true" />
+            <element signature="e#3513#3514#0" expanded="true" />
+            <element signature="e#3538#3539#0" expanded="true" />
+            <element signature="e#4392#4393#0" expanded="true" />
+            <element signature="e#4426#4427#0" expanded="true" />
+            <element signature="e#4460#4461#0" expanded="true" />
+            <element signature="e#4493#4494#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1054,26 +1058,40 @@ outputs[0].getOutput();</expression-string>
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/tomclaw/neuron/ui/InputDialog.java">
+    <entry file="file://$PROJECT_DIR$/src/com/tomclaw/neuron/core/Emitter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="73" column="49" lean-forward="true" selection-start-line="73" selection-start-column="49" selection-end-line="73" selection-end-column="49" />
+        <state relative-caret-position="254">
+          <caret line="21" column="16" lean-forward="false" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="16" />
           <folding>
-            <element signature="e#1075#1203#0" expanded="true" />
-            <element signature="e#1202#1203#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#272#273#0" expanded="true" />
+            <element signature="e#299#300#0" expanded="true" />
+            <element signature="e#751#752#0" expanded="true" />
+            <element signature="e#783#784#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/tomclaw/neuron/ui/TrainingDialog.java">
+    <entry file="file://$PROJECT_DIR$/src/com/tomclaw/neuron/core/InputNeuron.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="121" column="40" lean-forward="false" selection-start-line="121" selection-start-column="40" selection-end-line="121" selection-end-column="40" />
+        <state relative-caret-position="120">
+          <caret line="17" column="17" lean-forward="false" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3209#3210#0" expanded="true" />
-            <element signature="e#3234#3235#0" expanded="true" />
-            <element signature="e#4118#4119#0" expanded="true" />
+            <element signature="e#209#210#0" expanded="true" />
+            <element signature="e#236#237#0" expanded="true" />
+            <element signature="e#378#379#0" expanded="true" />
+            <element signature="e#407#408#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/tomclaw/neuron/ui/MainForm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="58" column="62" lean-forward="true" selection-start-line="58" selection-start-column="62" selection-end-line="58" selection-end-column="62" />
+          <folding>
+            <element signature="e#2731#2732#0" expanded="true" />
+            <element signature="e#2779#2780#0" expanded="true" />
           </folding>
         </state>
       </provider>

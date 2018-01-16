@@ -115,7 +115,7 @@
           <text value="Epoch count:"/>
         </properties>
       </component>
-      <component id="76987" class="javax.swing.JTextField" binding="epochCount">
+      <component id="76987" class="javax.swing.JTextField" binding="epochCountField">
         <constraints>
           <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>

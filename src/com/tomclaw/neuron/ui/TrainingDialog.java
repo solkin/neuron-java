@@ -7,6 +7,8 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 
@@ -20,16 +22,19 @@ public class TrainingDialog extends JDialog {
     private JButton buttonCancel;
     private JTable table1;
     private JButton addButton;
-    private JTextField epochCount;
+    private JTextField epochCountField;
     private JButton deleteButton;
 
     private DefaultTableModel model;
 
-    private double[][] trainingSet = new double[0][0];
+    private List<double[]> trainingSet;
+    private int epochCount;
 
-    public TrainingDialog(InputNeuron[] inputs, OutputNeuron[] outputs) {
+    public TrainingDialog(InputNeuron[] inputs, OutputNeuron[] outputs, List<double[]> trainingSet, int epochCount) {
         this.inputs = inputs;
         this.outputs = outputs;
+        this.trainingSet = trainingSet;
+        this.epochCount = epochCount;
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
@@ -80,13 +85,16 @@ public class TrainingDialog extends JDialog {
 
     private void onOK() {
         try {
-            this.trainingSet = new double[model.getRowCount()][model.getColumnCount()];
+            this.epochCount = Integer.parseInt(epochCountField.getText());
+            this.trainingSet = new ArrayList<>(model.getRowCount());
+            int columnCount = model.getColumnCount();
             for (int r = 0; r < model.getRowCount(); r++) {
-                trainingSet[r] = new double[model.getColumnCount()];
-                for (int c = 0; c < model.getColumnCount(); c++) {
+                double[] row = new double[columnCount];
+                for (int c = 0; c < columnCount; c++) {
                     String value = ((String) model.getValueAt(r, c));
-                    trainingSet[r][c] = Double.parseDouble(value);
+                    row[c] = Double.parseDouble(value);
                 }
+                trainingSet.add(row);
             }
         } catch (Throwable ex) {
             String message = String.format("Invalid input:\n%s", ex.getMessage());
@@ -119,7 +127,11 @@ public class TrainingDialog extends JDialog {
         table1.setTableHeader(new JTableHeader(table1.getColumnModel()));
     }
 
-    public double[][] getTrainingSet() {
+    public List<double[]> getTrainingSet() {
         return trainingSet;
+    }
+
+    public int getEpochCount() {
+        return epochCount;
     }
 }
