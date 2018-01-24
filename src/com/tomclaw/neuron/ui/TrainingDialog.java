@@ -6,8 +6,11 @@ import com.tomclaw.neuron.core.OutputNeuron;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
-import java.awt.event.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
@@ -39,17 +42,9 @@ public class TrainingDialog extends JDialog {
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
 
-        buttonOK.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onOK();
-            }
-        });
+        buttonOK.addActionListener(e -> onOK());
 
-        buttonCancel.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        });
+        buttonCancel.addActionListener(e -> onCancel());
 
         // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -60,11 +55,8 @@ public class TrainingDialog extends JDialog {
         });
 
         // call onCancel() on ESCAPE
-        contentPane.registerKeyboardAction(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                onCancel();
-            }
-        }, KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        contentPane.registerKeyboardAction(e -> onCancel(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0),
+                JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
         addButton.addActionListener(e -> {
             String[] row = new String[model.getColumnCount()];
@@ -91,7 +83,7 @@ public class TrainingDialog extends JDialog {
             for (int r = 0; r < model.getRowCount(); r++) {
                 double[] row = new double[columnCount];
                 for (int c = 0; c < columnCount; c++) {
-                    String value = ((String) model.getValueAt(r, c));
+                    String value = String.valueOf(model.getValueAt(r, c));
                     row[c] = Double.parseDouble(value);
                 }
                 trainingSet.add(row);
@@ -125,6 +117,12 @@ public class TrainingDialog extends JDialog {
         table1.setShowGrid(true);
         table1.setModel(model);
         table1.setTableHeader(new JTableHeader(table1.getColumnModel()));
+
+        trainingSet.stream().map(set ->
+                Arrays.stream(set)
+                        .boxed()
+                        .toArray(Double[]::new)
+        ).forEach(row -> model.addRow(row));
     }
 
     public List<double[]> getTrainingSet() {

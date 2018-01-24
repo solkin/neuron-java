@@ -4,6 +4,7 @@ import com.tomclaw.neuron.core.InputNeuron;
 
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.stream.IntStream;
 
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 
@@ -53,12 +54,12 @@ public class InputDialog extends JDialog {
 
     private void onOK() {
         try {
-            for (int i = 0; i < table1.getRowCount(); i++) {
-                String value = (String) table1.getValueAt(i, 1);
+            IntStream.range(0, table1.getRowCount()).forEach(i -> {
+                String value = String.valueOf(table1.getValueAt(i, 1));
                 if (value != null) {
                     neurons[i].emit(Double.parseDouble(value));
                 }
-            }
+            });
         } catch (Throwable ex) {
             String message = String.format("Invalid input:\n%s", ex.getMessage());
             JOptionPane.showMessageDialog(this, message, "Error", ERROR_MESSAGE);
@@ -75,10 +76,10 @@ public class InputDialog extends JDialog {
         Object rowData[][] = new Object[neurons.length][2];
         table1 = new JTable(rowData, columnNames);
         table1.setShowGrid(false);
-        for (int i = 0; i < rowData.length; i++) {
+        IntStream.range(0, rowData.length).forEach(i -> {
             InputNeuron neuron = neurons[i];
             String value = neuron.getOutput() == null ? "0.0" : String.valueOf(neuron.getOutput());
             rowData[i] = new Object[]{neuron.getName(), value};
-        }
+        });
     }
 }
