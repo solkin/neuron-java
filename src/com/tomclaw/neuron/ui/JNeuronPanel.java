@@ -19,11 +19,11 @@ import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
 
 public class JNeuronPanel extends JPanel {
 
-    private static int GLOBAL_PADDING = 30;
-    private static int VERTICAL_PADDING = 40;
-    private static int HORIZONTAL_PADDING = 60;
-    private static int SHADOW_PADDING = 3;
-    private static int NEURON_DIAMETER = 40;
+    private static final int GLOBAL_PADDING = 30;
+    private static final int VERTICAL_PADDING = 40;
+    private static final int HORIZONTAL_PADDING = 60;
+    private static final int SHADOW_PADDING = 3;
+    private static final int NEURON_DIAMETER = 40;
 
     private List<MapItem> items = emptyList();
 
