@@ -30,12 +30,12 @@ public class HiddenNeuron extends ActiveNeuron {
 
             double delta = receiver.getDelta();
             double gradient = output * delta;
-            sum += synapse.weight * delta;
+            sum += synapse.getWeight() * delta;
 
-            double weightDelta = velocity * gradient + moment * synapse.gradient;
+            double weightDelta = velocity * gradient + moment * synapse.getGradient();
 
-            synapse.weight += weightDelta;
-            synapse.gradient = gradient;
+            synapse.addWeight(weightDelta);
+            synapse.setGradient(gradient);
         }
 
         setDelta(derivative * sum);

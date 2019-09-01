@@ -5,15 +5,15 @@ package com.tomclaw.neuron.core;
  */
 public class Synapse {
 
-    double value;
-    double weight;
-    double gradient;
+    private double value;
+    private double weight;
+    private double gradient;
 
-    Synapse(double weight) {
+    public Synapse(double weight) {
         this.weight = weight;
     }
 
-    Synapse(double value, double weight) {
+    public Synapse(double value, double weight) {
         this.value = value;
         this.weight = weight;
     }
@@ -26,7 +26,23 @@ public class Synapse {
         this.weight = weight;
     }
 
+    public void addWeight(double weight) {
+        this.weight += weight;
+    }
+
     public double getValue() {
         return value;
+    }
+
+    public void setValue(double value) {
+        this.value = value;
+    }
+
+    public double getGradient() {
+        return gradient;
+    }
+
+    public void setGradient(double gradient) {
+        this.gradient = gradient;
     }
 }

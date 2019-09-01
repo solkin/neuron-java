@@ -22,7 +22,7 @@ public abstract class Emitter extends Neuron {
     public void emit(double input) {
         for (Receiver receiver : receivers.keySet()) {
             Synapse synapse = receivers.get(receiver);
-            synapse.value = input;
+            synapse.setValue(input);
             receiver.accept(this, synapse);
         }
     }

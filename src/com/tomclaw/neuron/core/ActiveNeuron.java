@@ -38,7 +38,7 @@ public abstract class ActiveNeuron extends Emitter implements Receiver {
             if (synapse == null || !accepted.contains(synapse)) {
                 return;
             }
-            input += synapse.weight * synapse.value;
+            input += synapse.getWeight() * synapse.getValue();
         }
 
         double output = sigmoid(input);

@@ -32,10 +32,10 @@ public class InputNeuron extends Emitter {
             double delta = receiver.getDelta();
             double gradient = output * delta;
 
-            double weightDelta = velocity * gradient + moment * synapse.gradient;
+            double weightDelta = velocity * gradient + moment * synapse.getGradient();
 
-            synapse.weight += weightDelta;
-            synapse.gradient = gradient;
+            synapse.addWeight(weightDelta);
+            synapse.setGradient(gradient);
         }
     }
 }
